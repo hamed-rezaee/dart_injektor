@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Minor refactor `resolve` method.
+
 ## 1.0.3
 
 - Update readme file.

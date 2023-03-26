@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Add `call` method to resolve dependency implicitly.
+
 ## 1.0.4
 
 - Minor refactor `resolve` method.

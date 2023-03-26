@@ -13,19 +13,19 @@ void main() {
     'SAMPLE_CLASS_FACTORY_KEY',
   );
 
-  final SampleClass resolvedDefaultInstance = injektor.resolve<SampleClass>();
+  final SampleClass resolvedDefaultInstance = injektor<SampleClass>();
   developer
       .log('resolvedDefaultInstance.type: ${resolvedDefaultInstance.type}');
 
   final SampleClass resolvedFactoryInstance =
-      injektor.resolve<SampleClass>('SAMPLE_CLASS_FACTORY_KEY');
+      injektor<SampleClass>('SAMPLE_CLASS_FACTORY_KEY');
   developer
       .log('resolvedFactoryInstance.type: ${resolvedFactoryInstance.type}');
 
   injektor.dispose<SampleClass>();
 
   try {
-    injektor.resolve<SampleClass>();
+    injektor<SampleClass>();
   } on Exception catch (e) {
     developer.log('$e');
   }

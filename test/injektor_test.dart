@@ -10,12 +10,16 @@ void main() {
 
     tearDown(() => injektor.disposeAll());
 
+    test('should throw if no instance or factory is registered.', () {
+      expect(() => injektor<SampleClass>(), throwsException);
+    });
+
     test('should register an instance and resolve it.', () {
       final SampleClass instance = SampleClass();
 
       injektor.register<SampleClass>(instance);
 
-      expect(injektor.resolve<SampleClass>(), equals(instance));
+      expect(injektor<SampleClass>(), equals(instance));
     });
 
     test('should throw if instance is already registered.', () {
@@ -28,10 +32,9 @@ void main() {
     });
 
     test('should lazy register a factory and resolve it.', () {
-      SampleClass factory() => SampleClass();
-      injektor.lazyRegister<SampleClass>(factory);
+      injektor.lazyRegister<SampleClass>(() => SampleClass());
 
-      expect(injektor.resolve<SampleClass>(), isA<SampleClass>());
+      expect(injektor<SampleClass>(), isA<SampleClass>());
     });
 
     test('should throw if factory is already registered.', () {
@@ -47,30 +50,28 @@ void main() {
     });
 
     test('should resolve a lazily registered factory only once.', () {
-      int count = 0;
+      SampleClass factory() => SampleClass(1);
 
-      SampleClass factory() => SampleClass(++count);
       injektor.lazyRegister<SampleClass>(factory);
 
-      final SampleClass instance1 = injektor.resolve<SampleClass>();
-      final SampleClass instance2 = injektor.resolve<SampleClass>();
+      final SampleClass instance1 = injektor<SampleClass>();
+      final SampleClass instance2 = injektor<SampleClass>();
 
       expect(instance1, equals(instance2));
+
       expect(instance1.count, equals(1));
+      expect(instance2.count, equals(1));
     });
 
     test('should resolve an instance registered after lazy registration.', () {
+      final SampleClass instance = SampleClass(1);
       SampleClass factory() => SampleClass();
+
+      injektor.register<SampleClass>(instance);
       injektor.lazyRegister<SampleClass>(factory);
 
-      final SampleClass instance = SampleClass();
-      injektor.register<SampleClass>(instance);
-
-      expect(injektor.resolve<SampleClass>(), equals(instance));
-    });
-
-    test('should throw if no instance or factory is registered.', () {
-      expect(() => injektor.resolve<SampleClass>(), throwsException);
+      expect(injektor<SampleClass>(), equals(instance));
+      expect(injektor<SampleClass>().count, equals(1));
     });
 
     test('should dispose an instance and resolve it again.', () {
@@ -79,7 +80,7 @@ void main() {
       injektor.register<SampleClass>(instance);
       injektor.dispose<SampleClass>();
 
-      expect(() => injektor.resolve<SampleClass>(), throwsException);
+      expect(() => injektor<SampleClass>(), throwsException);
     });
 
     test('should dispose a factory and resolve it again.', () {
@@ -88,7 +89,7 @@ void main() {
       injektor.lazyRegister<SampleClass>(factory);
       injektor.dispose<SampleClass>();
 
-      expect(() => injektor.resolve<SampleClass>(), throwsException);
+      expect(() => injektor<SampleClass>(), throwsException);
     });
 
     test('should dispose all instances and factories.', () {
@@ -98,9 +99,10 @@ void main() {
 
       injektor.register<SampleClass>(instance);
       injektor.lazyRegister<SampleClass>(factory);
+
       injektor.disposeAll();
 
-      expect(() => injektor.resolve<SampleClass>(), throwsException);
+      expect(() => injektor<SampleClass>(), throwsException);
     });
   });
 }

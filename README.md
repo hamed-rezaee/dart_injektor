@@ -15,7 +15,8 @@ final myDependency = MyDependency();
 injektor.register<MyDependency>(myDependency);
 
 // Resolve the dependency.
-final myClass = MyClass(injektor.resolve<MyDependency>());
+// Alternatively, you can use the `resolve` or `call` methods to be more explicit.
+final myClass = MyClass(injektor<MyDependency>());
 ```
 
 ## API
@@ -31,6 +32,10 @@ Registers an instance of a dependency. The T type parameter specifies the type o
 Registers a factory function for a dependency. The T type parameter specifies the type of the dependency. The `factory` parameter is a function that returns an instance of the dependency. The `identifier` parameter is an optional identifier for the factory. If not provided, it defaults to `DEFAULT`.
 
 > `resolve<T>([String identifier = 'DEFAULT'])`
+
+> `call<T>([String identifier = 'DEFAULT'])`
+
+> `<T>([String identifier = 'DEFAULT'])`
 
 Resolves a dependency instance. The `T` type parameter specifies the type of the dependency. The `identifier` parameter is an optional identifier for the instance or factory to resolve. If not provided, it defaults to `DEFAULT`. If an instance is registered for the given type and identifier, it is returned. Otherwise, if a factory is registered for the given type and identifier, the factory is called to create an instance and register it before returning it. If neither an instance nor a factory is registered, an exception is thrown.
 

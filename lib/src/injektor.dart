@@ -66,6 +66,9 @@ class Injektor implements BaseInjektor {
     );
   }
 
+  /// Shorthand for [resolve] method.
+  T call<T>([String identifier = 'DEFAULT']) => resolve<T>(identifier);
+
   @override
   void dispose<T>([String identifier = 'DEFAULT']) {
     _disposeInstance<T>(identifier);

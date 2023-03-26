@@ -42,6 +42,14 @@ Disposes a dependency instance or factory. The T type parameter specifies the ty
 
 Disposes all dependency instances and factories. Removes all instances from the instances map and all factories from the factories map.
 
+## Features
+
+- ✅ Register instance (Eager), instance is created when register.
+- ✅ Register factory (Lazy), instance is created when first resolve.
+- ✅ Resolve instance, return instance if exists.
+- ✅ Dispose instance or factory, remove instance or factory from injector.
+- ✅ Dispose All, remove all instances and factories from injector.
+
 ## License
 
-This library is licensed under the `MIT` License.
+This library is licensed under the `MIT License`.

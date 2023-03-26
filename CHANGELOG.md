@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Update readme file.
+
 ## 1.0.5
 
 - Add `call` method to resolve dependency implicitly.

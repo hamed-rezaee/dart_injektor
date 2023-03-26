@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
@@ -29,13 +29,10 @@ jobs:
       - name: Install lcov
         run: sudo apt-get install lcov
 
-      - name: Add lcov to PATH
-        run: export PATH="$PATH:/usr/bin/lcov"
-
       - name: Run tests with coverage
         run: |
           dart test --coverage=coverage
-          /usr/bin/genhtml coverage/lcov.info --output-directory coverage/report
+          if [ -f "$GITHUB_WORKSPACE/coverage/lcov.info" ]; then genhtml $GITHUB_WORKSPACE/coverage/lcov.info --output-directory coverage/report; fi
         env:
           CI: true
 

@@ -1,5 +1,5 @@
-name: dart_dependency_injector
-description: A starting point for Dart libraries or applications.
+name: dart_injektor
+description: This is a lightweight dependency injection package in Dart language that provides the ability to register and resolve dependencies.
 
 version: 1.0.0
 

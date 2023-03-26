@@ -1,4 +1,4 @@
-abstract class BaseDependencyInjector {
+abstract class BaseInjektor {
   void register<T>(T instance, [String identifier = 'DEFAULT']);
 
   void lazyRegister<T>(Function() factory, [String identifier = 'DEFAULT']);

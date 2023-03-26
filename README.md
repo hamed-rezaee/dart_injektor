@@ -1,26 +1,26 @@
-# Dependency Injector
+# Injektor
 
-This is a lightweight dependency injection library that provides the ability to register and resolve dependencies.
+This is a lightweight dependency injection package in Dart language that provides the ability to register and resolve dependencies.
 
 ## Usage
 
 ```dart
-import 'base_dependency_injector.dart';
+import 'package:dart_injektor/injektor.dart';
 
 // Fetch the dependency injector instance, or create a new one.
-final injector = DependencyInjector();
+final injektor = Injektor();
 
 // Register a dependency instance.
 final myDependency = MyDependency();
-injector.register<MyDependency>(myDependency);
+injektor.register<MyDependency>(myDependency);
 
 // Resolve the dependency.
-final myClass = MyClass(injector.resolve<MyDependency>());
+final myClass = MyClass(injektor.resolve<MyDependency>());
 ```
 
 ## API
 
-The `DependencyInjector` class provides the following methods:
+The `Injektor` package provides the following methods:
 
 > `register<T>(T instance, [String identifier = 'DEFAULT'])`
 

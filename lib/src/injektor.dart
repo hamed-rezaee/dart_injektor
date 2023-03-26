@@ -1,16 +1,16 @@
-import 'base_dependency_injector.dart';
+import 'base_injektor.dart';
 
-class DependencyInjector implements BaseDependencyInjector {
-  factory DependencyInjector() => _instance;
+class Injektor implements BaseInjektor {
+  factory Injektor() => _instance;
 
-  DependencyInjector._();
+  Injektor._();
 
   final Map<Type, Map<String, dynamic>> _instances =
       <Type, Map<String, dynamic>>{};
   final Map<Type, Map<String, void Function()>> _factories =
       <Type, Map<String, void Function()>>{};
 
-  static final DependencyInjector _instance = DependencyInjector._();
+  static final Injektor _instance = Injektor._();
 
   @override
   void register<T>(T instance, [String identifier = 'DEFAULT']) {

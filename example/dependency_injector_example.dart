@@ -1,31 +1,31 @@
 import 'dart:developer' as developer;
 
-import 'package:dart_dependency_injector/dependency_injector.dart';
+import 'package:dart_injektor/injektor.dart';
 
 void main() {
-  final DependencyInjector injector = DependencyInjector();
+  final Injektor injektor = Injektor();
 
   final SampleClass sampleClassInstance = SampleClass();
-  injector.register<SampleClass>(sampleClassInstance);
+  injektor.register<SampleClass>(sampleClassInstance);
 
-  injector.lazyRegister<SampleClass>(
+  injektor.lazyRegister<SampleClass>(
     () => SampleClass(type: 'factory'),
     'SAMPLE_CLASS_FACTORY_KEY',
   );
 
-  final SampleClass resolvedDefaultInstance = injector.resolve<SampleClass>();
+  final SampleClass resolvedDefaultInstance = injektor.resolve<SampleClass>();
   developer
       .log('resolvedDefaultInstance.type: ${resolvedDefaultInstance.type}');
 
   final SampleClass resolvedFactoryInstance =
-      injector.resolve<SampleClass>('SAMPLE_CLASS_FACTORY_KEY');
+      injektor.resolve<SampleClass>('SAMPLE_CLASS_FACTORY_KEY');
   developer
       .log('resolvedFactoryInstance.type: ${resolvedFactoryInstance.type}');
 
-  injector.dispose<SampleClass>();
+  injektor.dispose<SampleClass>();
 
   try {
-    injector.resolve<SampleClass>();
+    injektor.resolve<SampleClass>();
   } on Exception catch (e) {
     developer.log('$e');
   }

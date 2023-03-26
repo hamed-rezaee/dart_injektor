@@ -16,7 +16,7 @@ injektor.register<MyDependency>(myDependency);
 
 // Resolve the dependency.
 // Alternatively, you can use the `resolve` or `call` methods to be more explicit.
-final myClass = MyClass(injektor<MyDependency>());
+final myClass = injektor<MyDependency>();
 ```
 
 ## API

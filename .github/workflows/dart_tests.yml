@@ -1,4 +1,4 @@
-name: Dart Tests and Analysis with Code Coverage
+name: Dart Tests and Analysis
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 
 jobs:
   test:
-    name: Analysis and Tests
+    name: Injektor Analysis and Tests
     runs-on: ubuntu-latest
     steps:
       - name: Setup Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
@@ -26,19 +26,5 @@ jobs:
       - name: Analyze Project Source
         run: dart analyze
 
-      - name: Install lcov
-        run: sudo apt-get install lcov
-
-      - name: Run tests with coverage
-        run: |
-          dart test --coverage=coverage
-          if [ -f "$GITHUB_WORKSPACE/coverage/lcov.info" ]; then genhtml $GITHUB_WORKSPACE/coverage/lcov.info --output-directory coverage/report; fi
-        env:
-          GITHUB_WORKSPACE: ${{github.workspace}}
-          CI: true
-
-      - name: Upload Code Coverage
-        uses: actions/upload-artifact@v2
-        with:
-          name: code-coverage-report
-          path: coverage/report/index.html
+      - name: Run tests
+        run: dart test

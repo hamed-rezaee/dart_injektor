@@ -55,7 +55,7 @@ class Injektor implements BaseInjektor {
     if (_isFactoryRegistered<T>(identifier)) {
       final T instance = _factories[T]![identifier]!() as T;
 
-      register(instance, identifier);
+      register<T>(instance, identifier);
       _disposeFactory<T>(identifier);
 
       return instance;

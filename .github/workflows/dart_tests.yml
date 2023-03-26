@@ -26,10 +26,16 @@ jobs:
       - name: Analyze Project Source
         run: dart analyze
 
+      - name: Install lcov
+        run: sudo apt-get install lcov
+
+      - name: Add lcov to PATH
+        run: export PATH="$PATH:/usr/bin/lcov"
+
       - name: Run tests with coverage
         run: |
           dart test --coverage=coverage
-          genhtml coverage/lcov.info --output-directory coverage/report
+          /usr/bin/genhtml coverage/lcov.info --output-directory coverage/report
         env:
           CI: true
 

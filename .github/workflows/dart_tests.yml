@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Dart Design Patterns Analysis and Tests
+    name: Analysis and Tests
     runs-on: ubuntu-latest
     steps:
       - name: Setup Repository
@@ -34,6 +34,7 @@ jobs:
           dart test --coverage=coverage
           if [ -f "$GITHUB_WORKSPACE/coverage/lcov.info" ]; then genhtml $GITHUB_WORKSPACE/coverage/lcov.info --output-directory coverage/report; fi
         env:
+          GITHUB_WORKSPACE: ${{github.workspace}}
           CI: true
 
       - name: Upload Code Coverage

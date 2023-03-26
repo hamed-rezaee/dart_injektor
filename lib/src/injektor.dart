@@ -1,6 +1,10 @@
 import 'base_injektor.dart';
 
+/// This is the default implementation of [BaseInjektor] that is used by [Injektor].
+///
+/// This class is a singleton and can be accessed using the [Injektor] factory.
 class Injektor implements BaseInjektor {
+  /// Returns the singleton instance of [Injektor].
   factory Injektor() => _instance;
 
   Injektor._();

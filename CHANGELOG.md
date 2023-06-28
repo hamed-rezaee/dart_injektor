@@ -1,3 +1,8 @@
+## 1.0.7
+
+- Update analysis options.
+- Update SDK support version.
+
 ## 1.0.6
 
 - Update readme file.

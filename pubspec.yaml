@@ -1,12 +1,12 @@
 name: dart_injektor
 description: This is a lightweight dependency injection package in Dart language that provides the ability to register and resolve dependencies.
 
-version: 1.0.6
+version: 1.0.7
 
 homepage: https://github.com/hamed-deriv/dart_injektor
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dev_dependencies:
   lints: ^2.0.0
